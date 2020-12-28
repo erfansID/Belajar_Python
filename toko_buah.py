@@ -4,14 +4,16 @@
 
 buah = {'Apel':2000, 'Ceri':4000, 'Pisang':4500, 'Semangka':7000}
 uang = 70000
+utang = 0
+is_ngutang = False
 
 print('=== Selamat Datang di toko ===')
 print('=== Selamat Berbelanja ===')
-print('*** Kamu punya uang Rp.',  str(uang), '***')
+print('*** Kamu punya uang Rp. {} ***'.format(uang))
 
 for i in buah:
-    permintaan = input('Mau beli ' + i +  ' berapa biji? : ')
-    print('Kamu akan membeli', permintaan, i, 'biji' )
+    permintaan = input('Mau beli {} berapa biji? : '.format(i))
+    print('Kamu akan membeli {} {} biji'.format(permintaan, i))
 
     uangku = int(permintaan)
     total = buah[i] * uangku
@@ -21,10 +23,13 @@ for i in buah:
         print('Anda telah membeli', permintaan, i)
         uang -= total
     elif uang <= total:
-        bc = input('Uang anda habis, mau pinjam uang ? Ya/Tidak :')
-        if bc == 'Ya':
-            b = int(input('Rupiah :'))
-            uang += b          
+        if not is_ngutang:
+            bc = input('Uang anda habis, mau pinjam uang ? Ya/Tidak :')
+            if bc == 'Ya':
+                b = int(input('Rupiah :'))
+                utang += b
+                uang += b         
+                is_ngutang = True 
     else:
         print('Uang anda tidak cukup')
         print('Anda tidak dapat membeli ', i, ' sebanyak itu')
